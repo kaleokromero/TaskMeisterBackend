@@ -32,12 +32,12 @@ public class TaskController {
         return taskService.list();    
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     List<Tasks> update(@RequestBody Tasks tasks) {
         return taskService.update(tasks);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     List<Tasks> delete(Long id) {
         return taskService.delete(id);
     }

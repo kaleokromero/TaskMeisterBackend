@@ -33,19 +33,11 @@ public class TaskService {
     }
     
     public List<Tasks> list() {
-        Sort sort = Sort.by("priority").descending()
-        .and(Sort.by("due_date").ascending());
-        return tasksRepository.findAll(sort);
+        return tasksRepository.findAll();
     }
 
-    public List<Tasks> update(Tasks tasks) {
-        if (tasks.getStatus().equals("PENDING")) {
-            tasksRepository.save(tasks);
-            return list();
-        } else {
-            throw new IllegalArgumentException
-            ("Tasks can only be updated or deleted if current status is pending");
-        }
+    public List<Tasks> update(Tasks tasks) {       
+        return list();        
     }
 
     public List<Tasks> delete(Long id) {

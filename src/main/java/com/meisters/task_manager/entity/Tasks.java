@@ -35,6 +35,16 @@ public class Tasks {
     @Column(name = "status")
     private status status;
 
+    public Tasks(){}
+
+    public Tasks(String name, String description, LocalDate dueDate,
+            com.meisters.task_manager.entity.Tasks.status status) {
+        this.name = name;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
