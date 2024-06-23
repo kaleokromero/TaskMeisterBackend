@@ -4,7 +4,6 @@ import java.util.List;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.meisters.task_manager.entity.Tasks;
