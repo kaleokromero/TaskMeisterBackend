@@ -51,7 +51,7 @@ public class TaskService {
 
     public List<Tasks> delete(Long id) {
         Tasks task = tasksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
-        if (task.getStatus().equals("PENDING")) {
+        if (task.getStatus().equals("PENDING") || task.getStatus().equals("COMPLETED")) {
             tasksRepository.deleteById(id);
             return list();
         } else {
