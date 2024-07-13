@@ -1,6 +1,7 @@
 package com.meisters.task_manager.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -18,8 +19,7 @@ public class TaskService {
     }
 
     /*  a. tasks can only be created during weekdays;
-        b. tasks can only be updated or deleted if in status pending;
-        c. tasks can only be deleted if its creation date is older than 5 days ago.
+        b. tasks can only be deleted if status is pending;
     */
 
     public List<Tasks> create(Tasks tasks) {
@@ -35,8 +35,18 @@ public class TaskService {
         return tasksRepository.findAll();
     }
 
-    public List<Tasks> update(Tasks tasks) {       
-        return list();        
+    public Optional<Tasks> list(Long id) {
+        return tasksRepository.findById(id);
+    }
+    
+    public List<Tasks> update(Long id, Tasks tasks) {       
+        Tasks task = tasksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        task.setName(tasks.getName());
+        task.setDescription(tasks.getDescription());
+        task.setDueDate(tasks.getDueDate());
+        task.setStatus(tasks.getStatus());
+        task = tasksRepository.save(task);
+        return list();
     }
 
     public List<Tasks> delete(Long id) {

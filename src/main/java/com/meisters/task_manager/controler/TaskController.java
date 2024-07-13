@@ -32,10 +32,15 @@ public class TaskController {
     List<Tasks> list() {
         return taskService.list();    
     }
+    @GetMapping("/{id}")
+    public Tasks list(@PathVariable Long id) {
+        return taskService.list(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+    }
+
 
     @PutMapping("/{id}")
-    List<Tasks> update(@RequestBody Tasks tasks) {
-        return taskService.update(tasks);
+    List<Tasks> update(@PathVariable Long id, @RequestBody Tasks tasks) {
+        return taskService.update(id, tasks);
     }
 
     @DeleteMapping("/{id}")
