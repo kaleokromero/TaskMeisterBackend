@@ -48,12 +48,19 @@ public class TaskService {
         task = tasksRepository.save(task);
         return list();
     }
+    
+    public List<Tasks> updateStatus(Long id, Tasks.status status) {
+        Tasks task = tasksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
+        task.setStatus(status);
+        task = tasksRepository.save(task);
+        return list();
+    }
 
     public List<Tasks> delete(Long id) {
         Tasks task = tasksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Task not found"));
-        if (task.getStatus().equals("PENDING") || task.getStatus().equals("COMPLETED")) {
+        if (task.getStatus().equals(Tasks.status.PENDING) || task.getStatus().equals(Tasks.status.COMPLETED)) {
             tasksRepository.deleteById(id);
-            return list();
+            return tasksRepository.findAll();
         } else {
             throw new IllegalArgumentException
             ("Tasks can only be deleted if current status is pending");
