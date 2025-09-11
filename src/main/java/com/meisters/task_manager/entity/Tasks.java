@@ -28,15 +28,11 @@ public class Tasks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "status")
     private status status;
 }
